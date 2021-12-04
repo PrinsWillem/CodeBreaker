@@ -39,7 +39,7 @@ public class MainMenu implements Screen, ContactListener {
 
         bg = new Texture("7 - Backgrounds/ship1.jpg");
         player = new Player(world, "0 - Player/Player 1.png", GameInfo.WIDTH / 2,
-                GameInfo.HEIGHT / 2 + 250);
+                GameInfo.HEIGHT / 2);
 
         cloud = new Cloud(world, "4 - Clouds/Cloud 1.png");
     }
@@ -85,8 +85,8 @@ public class MainMenu implements Screen, ContactListener {
 
         game.getBatch().begin();
         game.getBatch().draw(bg, 0, 0);
-        game.getBatch().draw(player, player.getX(),
-                player.getY() + player.getHeight() / 2f);
+        game.getBatch().draw(player, player.getX() - player.getWidth() / 2f,
+                player.getY() - player.getHeight() / 2f);
         game.getBatch().draw(cloud, cloud.getX() - 43,
                 cloud.getY() - cloud.getHeight() / 2f);
         game.getBatch().end();
