@@ -17,6 +17,7 @@ public class Player extends Sprite {
         createBody();
     }
 
+
     void createBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -29,7 +30,7 @@ public class Player extends Sprite {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
+//        fixtureDef.density = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData("Player");

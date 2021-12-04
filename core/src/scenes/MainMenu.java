@@ -34,10 +34,10 @@ public class MainMenu implements Screen, ContactListener {
         box2DCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
         debugRenderer = new Box2DDebugRenderer();
 
-        world = new World(new Vector2(0, -9.8f), true);
+        world = new World(new Vector2(0, 0), true);
         world.setContactListener(this);
 
-        bg = new Texture("7 - Backgrounds/Game BG.png");
+        bg = new Texture("7 - Backgrounds/ship1.jpg");
         player = new Player(world, "0 - Player/Player 1.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2 + 250);
 
@@ -45,13 +45,28 @@ public class MainMenu implements Screen, ContactListener {
     }
 
     void update(float dt) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0),
-                    player.getBody().getWorldCenter(), true);
-        }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            player.getBody().applyLinearImpulse(new Vector2(0.1f, 0),
-                    player.getBody().getWorldCenter(), true);
+
+        float x =0, y =0;
+
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            y += 1;
+//            player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0),
+//                    player.getBody().getWorldCenter(), true);
+        }else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            y -= 1;
+//            player.getBody().applyLinearImpulse(new Vector2(0.1f, 0),
+//                    player.getBody().getWorldCenter(), true);
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            x -= 1;
+//            player.getBody().applyLinearImpulse(new Vector2(-0.1f, 0),
+//                    player.getBody().getWorldCenter(), true);
+        }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            x += 1;
+//            player.getBody().applyLinearImpulse(new Vector2(0.1f, 0),
+//                    player.getBody().getWorldCenter(), true);
+        }
+        player.getBody().setLinearVelocity(x, y);
     }
 
     @Override
@@ -71,7 +86,7 @@ public class MainMenu implements Screen, ContactListener {
         game.getBatch().begin();
         game.getBatch().draw(bg, 0, 0);
         game.getBatch().draw(player, player.getX(),
-                player.getY() - player.getHeight() / 2f - 7);
+                player.getY() + player.getHeight() / 2f);
         game.getBatch().draw(cloud, cloud.getX() - 43,
                 cloud.getY() - cloud.getHeight() / 2f);
         game.getBatch().end();
@@ -99,6 +114,30 @@ public class MainMenu implements Screen, ContactListener {
     @Override
     public void hide() {
 
+    }
+
+    public Body createBox(int x, int y, int width, int height, boolean isStatic){
+
+        Body pBody;
+        BodyDef def = new BodyDef();
+
+
+        if(isStatic)
+            def.type = BodyDef.BodyType.StaticBody;
+        else
+            def.type = BodyDef.BodyType.DynamicBody;
+
+        def.position.set(x/GameInfo.PPM,y/GameInfo.PPM);
+        def.fixedRotation = true;
+        pBody = world.createBody(def);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width/2/GameInfo.PPM,height/2/GameInfo.PPM);
+
+        pBody.createFixture(shape, 1.0f);
+        shape.dispose();
+
+        return pBody;
     }
 
     @Override
