@@ -4,10 +4,7 @@ import clouds.Cloud;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -22,16 +19,20 @@ public class MainMenu implements Screen, ContactListener {
     private Player player;
     private Cloud cloud;
     private World world;
+    OrthographicCamera camera;
     private OrthographicCamera box2DCamera;
     private Box2DDebugRenderer debugRenderer;
 
     public MainMenu(GameMain game) {
         this.game = game;
 
+//        camera = new OrthographicCamera();
+//        camera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HEIGHT);
+
         box2DCamera = new OrthographicCamera();
         box2DCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM,
                 GameInfo.HEIGHT / GameInfo.PPM);
-        box2DCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+        box2DCamera.position.set(GameInfo.WIDTH / 2, GameInfo.HEIGHT / 2, 0);
         debugRenderer = new Box2DDebugRenderer();
 
         world = new World(new Vector2(0, 0), true);
@@ -41,7 +42,8 @@ public class MainMenu implements Screen, ContactListener {
         player = new Player(world, "0 - Player/Player 1.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
 
-        cloud = new Cloud(world, "4 - Clouds/Cloud 1.png");
+        cloud = new Cloud(world, "platform.png", GameInfo.WIDTH / 2,
+                GameInfo.HEIGHT / 2);
     }
 
     void update(float dt) {
@@ -83,12 +85,19 @@ public class MainMenu implements Screen, ContactListener {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+//        camera.position.set(player.getX(), player.getY(), 0);
+//        camera.update();
+
+//        game.getBatch().setProjectionMatrix(camera.combined);
+
         game.getBatch().begin();
+
         game.getBatch().draw(bg, 0, 0);
-        game.getBatch().draw(player, player.getX() - player.getWidth() / 2f,
-                player.getY() - player.getHeight() / 2f);
-        game.getBatch().draw(cloud, cloud.getX() - 43,
-                cloud.getY() - cloud.getHeight() / 2f);
+        game.getBatch().draw(player, player.getX() - (player.getWidth() / 2),
+                player.getY() - (player.getHeight() / 2));
+        game.getBatch().draw(cloud, cloud.getX() - (cloud.getWidth() / 2),
+                cloud.getY() - ((cloud.getWidth() / 2) + 8));
+
         game.getBatch().end();
 
         debugRenderer.render(world, box2DCamera.combined);
@@ -114,30 +123,6 @@ public class MainMenu implements Screen, ContactListener {
     @Override
     public void hide() {
 
-    }
-
-    public Body createBox(int x, int y, int width, int height, boolean isStatic){
-
-        Body pBody;
-        BodyDef def = new BodyDef();
-
-
-        if(isStatic)
-            def.type = BodyDef.BodyType.StaticBody;
-        else
-            def.type = BodyDef.BodyType.DynamicBody;
-
-        def.position.set(x/GameInfo.PPM,y/GameInfo.PPM);
-        def.fixedRotation = true;
-        pBody = world.createBody(def);
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width/2/GameInfo.PPM,height/2/GameInfo.PPM);
-
-        pBody.createFixture(shape, 1.0f);
-        shape.dispose();
-
-        return pBody;
     }
 
     @Override
