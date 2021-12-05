@@ -1,6 +1,7 @@
 package scenes;
 
-import clouds.Cloud;
+import collideItems.Platform;
+import collideItems.SouthEdgeFront;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -26,7 +27,8 @@ public class MainMenu implements Screen, ContactListener {
 
     private Texture bg;
     private Player player;
-    private Cloud cloud;
+    private Platform platform;
+    private SouthEdgeFront southEdgeFront;
 
     public MainMenu(GameMain game) {
         this.game = game;
@@ -46,7 +48,9 @@ public class MainMenu implements Screen, ContactListener {
         bg = new Texture("Backgrounds/ship1.jpg");
         player = new Player(world,GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
-        cloud = new Cloud(world, "platform.png", GameInfo.WIDTH / 2,
+        platform = new Platform(world, "Backgrounds/ShipCollision/platform.png", GameInfo.WIDTH / 2,
+                GameInfo.HEIGHT / 2);
+        southEdgeFront = new SouthEdgeFront(world, "Backgrounds/ShipCollision/WallShipFront.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
     }
 
@@ -89,12 +93,14 @@ public class MainMenu implements Screen, ContactListener {
         player.drawPlayerIdle(game.getBatch());
         player.drawPlayerAnimation(game.getBatch());
 
-        game.getBatch().draw(cloud, cloud.getX() - (cloud.getWidth() / 2),
-                cloud.getY() - ((cloud.getWidth() / 2) + 8));
+        game.getBatch().draw(platform, platform.getX() - (platform.getWidth() / 2),
+                platform.getY() - ((platform.getWidth() / 2) + 8));
+        game.getBatch().draw(southEdgeFront, southEdgeFront.getX() - 160,
+                southEdgeFront.getY());
 
         game.getBatch().end();
 
-//        debugRenderer.render(world, box2DCamera.combined);
+        debugRenderer.render(world, box2DCamera.combined);
 
         mainCamera.position.set(player.getX(), player.getY(), 0);
         game.getBatch().setProjectionMatrix(mainCamera.combined);
@@ -127,6 +133,7 @@ public class MainMenu implements Screen, ContactListener {
     public void dispose() {
         bg.dispose();
         player.getTexture().dispose();
+        platform.getTexture().dispose();
     }
 
     @Override

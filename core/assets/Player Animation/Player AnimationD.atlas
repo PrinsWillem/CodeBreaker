@@ -1,27 +1,34 @@
-Player Animation.png
-size: 504, 48
+Player AnimationD.png
+size: 540, 48
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+Player 1
+  rotate: false
+  xy: 4, 0
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: -1
 Player 2
   rotate: false
-  xy: 76, 1
-  size: 25, 47
-  orig: 25, 47
+  xy: 74, 0
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1
 Player 3
   rotate: false
-  xy: 137, 0
-  size: 22, 47
-  orig: 22, 47
+  xy: 135, 0
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1
 Player 4
   rotate: false
-  xy: 197, 0
-  size: 23, 47
-  orig: 23, 47
+  xy: 196, 0
+  size: 29, 47
+  size: 29, 47
   offset: 0, 0
   index: -1
 Player 5
@@ -33,29 +40,29 @@ Player 5
   index: -1
 Player 6
   rotate: false
-  xy: 313, 1
-  size: 28, 47
-  orig: 28, 47
+  xy: 254, 0
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1
 Player 7
   rotate: false
-  xy: 374, 1
-  size: 24, 48
-  orig: 24, 48
+  xy: 375, 0
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1
 Player 8
   rotate: false
-  xy: 438, 0
-  size: 23, 48
-  orig: 23, 48
+  xy: 435, 1
+  size: 29, 47
+  orig: 29, 47
   offset: 0, 0
   index: -1
 Player 9
   rotate: false
-  xy: 498, 0
-  size: 22, 48
-  orig: 22, 48
+  xy: 495, 0
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1

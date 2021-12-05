@@ -1,18 +1,18 @@
-package clouds;
+package collideItems;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 import helpers.GameInfo;
 
-public class Cloud extends Sprite {
+public class SouthEdgeFront extends Sprite {
     private World world;
     private Body body;
 
-    public Cloud(World world, String name, float x, float y) {
-        super(new Texture("platform.png"));
+    public SouthEdgeFront(World world, String name, float x, float y) {
+        super(new Texture(name));
         this.world = world;
-        setPosition(x + 97, y + 22);
+        setPosition(x + 160, y - 240);
         createBody();
     }
 
@@ -31,7 +31,7 @@ public class Cloud extends Sprite {
 //        fixtureDef.density = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("Cloud");
+        fixture.setUserData("SouthEdgeFront");
 //        fixture.setSensor(true);
         shape.dispose();
     }
