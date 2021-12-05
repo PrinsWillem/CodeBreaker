@@ -5,33 +5,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 import helpers.GameInfo;
 
-public abstract class collideItems extends Sprite {
+public class HallwaySouthEdge1 extends Sprite {
     private World world;
     private Body body;
-    private float x1;
-    private float y1;
-    private String collisionName;
 
-    public collideItems(World world, String name, float x, float y, float x1, float y1, String collisionName) {
+    public HallwaySouthEdge1(World world, String name, float x, float y) {
         super(new Texture(name));
         this.world = world;
-        this.x1 = x1;
-        this.y1 = y1;
-        this.collisionName = collisionName;
-        setPosition(x + x1, y + y1);
+        setPosition(x - -540, y - -14);
         createBody();
-    }
-
-    public void setX1(float x1) {
-        this.x1 = x1;
-    }
-
-    public void setY1(float y1) {
-        this.y1 = y1;
-    }
-
-    public void setCollisionName(String collisionName) {
-        this.collisionName = collisionName;
     }
 
     void createBody() {
@@ -49,7 +31,7 @@ public abstract class collideItems extends Sprite {
 //        fixtureDef.density = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData(collisionName);
+        fixture.setUserData("HallwaySouthEdge");
 //        fixture.setSensor(true);
         shape.dispose();
     }
