@@ -6,24 +6,40 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import helpers.GameInfo;
+import org.w3c.dom.Text;
 
 public class Player extends Sprite {
 
     private World world;
     private Body body;
 
+    private Texture playerD;
+    private Texture playerU;
+
     private TextureAtlas playerAtlas;
+    private TextureAtlas playerAtlasD;
+    private TextureAtlas playerAtlasU;
     private Animation<TextureRegion> animation;
+    private Animation<TextureRegion> animationD;
+    private Animation<TextureRegion> animationU;
     private float elapsedTime;
 
     private boolean isWalking;
+    private boolean isWalkingD;
+    private boolean isWalkingU;
     private boolean isChangedSide;
 
     public Player(World world, float x, float y) {
         super(new Texture("Player/Player 1.png"));
         this.world = world;
         setPosition(x - getWidth() / 2f, y - getHeight() / 2f);
+
+        playerD = new Texture("Player/Player 1D.png");
+        playerU = new Texture("Player/Player 1U.png");
+
         playerAtlas = new TextureAtlas("Player Animation/Player Animation.atlas");
+        playerAtlasD = new TextureAtlas("Player Animation/Player AnimationD.atlas");
+        playerAtlasU = new TextureAtlas("Player Animation/Player AnimationU.atlas");
         createBody();
     }
 
@@ -51,11 +67,20 @@ public class Player extends Sprite {
         if (!isWalking) {
             if (!isChangedSide && !this.isFlipX()) {
                 this.flip(true, false);
+                batch.draw(this, this.getX() - (this.getWidth() / 2),
+                        this.getY() - (this.getHeight() / 2));
             } else if (isChangedSide && this.isFlipX()) {
                 this.flip(true, false);
+                batch.draw(this, this.getX() - (this.getWidth() / 2),
+                        this.getY() - (this.getHeight() / 2));
             }
-            batch.draw(this, this.getX() - (this.getWidth() / 2),
-                    this.getY() - (this.getHeight() / 2));
+            else if (!isWalkingD) {
+                batch.draw(playerD, this.getX() - (this.getWidth() / 2),
+                        this.getY() - (this.getHeight() / 2));
+            } else if (!isWalkingU) {
+                batch.draw(playerU, this.getX() - (this.getWidth() / 2),
+                        this.getY() - (this.getHeight() / 2));
+            }
         }
     }
 
@@ -71,12 +96,21 @@ public class Player extends Sprite {
                     frame.flip(true, false);
                 }
             }
-
             animation = new Animation<TextureRegion>(1f / 10f, playerAtlas.getRegions());
-
             batch.draw(animation.getKeyFrame(elapsedTime,true), this.getX() - (this.getWidth() / 2),
                     this.getY() - (this.getHeight() / 2));
-
+        } else if (isWalkingD) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            Array<TextureAtlas.AtlasRegion> frames = playerAtlasD.getRegions();
+            animationD = new Animation<TextureRegion>(1f / 10f, playerAtlasD.getRegions());
+            batch.draw(animationD.getKeyFrame(elapsedTime,true), this.getX() - (this.getWidth() / 2),
+                    this.getY() - (this.getHeight() / 2));
+        } else if (isWalkingU) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            Array<TextureAtlas.AtlasRegion> frames = playerAtlasU.getRegions();
+            animationU = new Animation<TextureRegion>(1f / 10f, playerAtlasU.getRegions());
+            batch.draw(animationU.getKeyFrame(elapsedTime,true), this.getX() - (this.getWidth() / 2),
+                    this.getY() - (this.getHeight() / 2));
         }
     }
 
@@ -91,6 +125,14 @@ public class Player extends Sprite {
 
     public void setWalking(boolean walking) {
         this.isWalking = walking;
+    }
+
+    public void setWalkingD(boolean walkingD) {
+        this.isWalkingD = walkingD;
+    }
+
+    public void setWalkingU(boolean walkingU) {
+        this.isWalkingU = walkingU;
     }
 
     public void setChangedSide(boolean changedSide) {

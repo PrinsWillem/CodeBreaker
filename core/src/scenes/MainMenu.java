@@ -59,19 +59,33 @@ public class MainMenu implements Screen, ContactListener {
         float x = 0, y = 0;
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            player.setWalking(false);
+            player.setChangedSide(false);
+            player.setWalkingD(false);
+            player.setWalkingU(true);
             y += 1;
         }else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            player.setWalking(false);
+            player.setChangedSide(false);
+            player.setWalkingD(true);
+            player.setWalkingU(false);
             y -= 1;
         }else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             player.setWalking(true);
-            player.setChangedSide(false);
+            player.setChangedSide(true);
+            player.setWalkingD(false);
+            player.setWalkingU(false);
             x -= 1;
         }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             player.setWalking(true);
             player.setChangedSide(true);
+            player.setWalkingD(false);
+            player.setWalkingU(false);
             x += 1;
         }else{
             player.setWalking(false);
+            player.setWalkingD(false);
+            player.setWalkingU(false);
         }
         player.getBody().setLinearVelocity(x, y);
 
