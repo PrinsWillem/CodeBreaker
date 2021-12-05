@@ -17,6 +17,7 @@ public class Player extends Sprite {
     private float elapsedTime;
 
     private boolean isWalking;
+    private boolean isChangedSide;
 
     public Player(World world, float x, float y) {
         super(new Texture("Player/Player 1.png"));
@@ -48,10 +49,10 @@ public class Player extends Sprite {
 
     public void drawPlayerIdle(SpriteBatch batch) {
         if (!isWalking) {
-            if (this.isFlipX()) {
+            if (!isChangedSide && !this.isFlipX()) {
                 this.flip(true, false);
-            } else if (!this.isFlipX()) {
-                this.flip(false, false);
+            } else if (isChangedSide && this.isFlipX()) {
+                this.flip(true, false);
             }
             batch.draw(this, this.getX() - (this.getWidth() / 2),
                     this.getY() - (this.getHeight() / 2));
@@ -90,6 +91,10 @@ public class Player extends Sprite {
 
     public void setWalking(boolean walking) {
         this.isWalking = walking;
+    }
+
+    public void setChangedSide(boolean changedSide) {
+        this.isChangedSide = changedSide;
     }
 
 }

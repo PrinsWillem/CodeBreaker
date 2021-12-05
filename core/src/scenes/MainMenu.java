@@ -64,9 +64,11 @@ public class MainMenu implements Screen, ContactListener {
             y -= 1;
         }else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             player.setWalking(true);
+            player.setChangedSide(false);
             x -= 1;
         }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             player.setWalking(true);
+            player.setChangedSide(true);
             x += 1;
         }else{
             player.setWalking(false);
