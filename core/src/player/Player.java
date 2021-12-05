@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import helpers.GameInfo;
-import org.w3c.dom.Text;
 
 public class Player extends Sprite {
 
@@ -73,8 +72,7 @@ public class Player extends Sprite {
                 this.flip(true, false);
                 batch.draw(this, this.getX() - (this.getWidth() / 2),
                         this.getY() - (this.getHeight() / 2));
-            }
-            else if (!isWalkingD) {
+            } else if (!isWalkingD) {
                 batch.draw(playerD, this.getX() - (this.getWidth() / 2),
                         this.getY() - (this.getHeight() / 2));
             } else if (!isWalkingU) {
