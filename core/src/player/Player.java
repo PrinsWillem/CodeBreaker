@@ -48,6 +48,11 @@ public class Player extends Sprite {
 
     public void drawPlayerIdle(SpriteBatch batch) {
         if (!isWalking) {
+            if (this.isFlipX()) {
+                this.flip(true, false);
+            } else if (!this.isFlipX()) {
+                this.flip(false, false);
+            }
             batch.draw(this, this.getX() - (this.getWidth() / 2),
                     this.getY() - (this.getHeight() / 2));
         }

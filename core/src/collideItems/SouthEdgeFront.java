@@ -12,7 +12,7 @@ public class SouthEdgeFront extends Sprite {
     public SouthEdgeFront(World world, String name, float x, float y) {
         super(new Texture(name));
         this.world = world;
-        setPosition(x + 160, y - 240);
+        setPosition(x + 500, y - 240);
         createBody();
     }
 
