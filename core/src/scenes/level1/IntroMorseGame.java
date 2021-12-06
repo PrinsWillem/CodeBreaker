@@ -1,6 +1,7 @@
-package scenes;
+package scenes.level1;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -10,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.codeclan.game.GameMain;
 
-public class IntroScreen implements Screen {
+public class IntroMorseGame implements Screen {
 
     private GameMain parent;
     private Stage stage;
@@ -22,7 +23,7 @@ public class IntroScreen implements Screen {
     Label startWords;
     Label startMorse;
 
-    public IntroScreen(GameMain gameMain) {
+    public IntroMorseGame(GameMain gameMain) {
         parent = gameMain;
         stage = new Stage(new ScreenViewport());
     }
@@ -59,6 +60,10 @@ public class IntroScreen implements Screen {
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            parent.changeScreen(GameMain.MORSEGAME);
+        }
     }
 
     @Override

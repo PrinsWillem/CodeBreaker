@@ -1,4 +1,4 @@
-package scenes;
+package scenes.level1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
