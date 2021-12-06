@@ -2,7 +2,9 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,12 +18,20 @@ import com.codeclan.game.GameMain;
 public class MenuScreen implements Screen {
 
     private GameMain parent;
+    private GameMain game;
     private Stage stage;
     private Label title;
 
+    private Texture bg;
+    private Sound waves;
+
     public MenuScreen(GameMain gameMain) {
         parent = gameMain;
+        this.game = gameMain;
         stage = new Stage(new ScreenViewport());
+
+        waves = Gdx.audio.newSound(Gdx.files.internal("Sounds/waves.ogg"));
+        waves.play();
     }
 
     @Override
@@ -35,22 +45,23 @@ public class MenuScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("Skin/clean-crispy-ui.json"));
 
-        title = new Label("Code Breaker", skin);
+        bg = new Texture("Backgrounds/titleScreen.jpg");
 
         TextButton newGame = new TextButton("Play", skin);
         TextButton preferences = new TextButton(" Settings ", skin);
         TextButton exit = new TextButton("Exit", skin);
 
-        table.add(title).colspan(2).pad(0, 0, 20, 0);
+        table.add().height(475).pad(0, 0, 20, 0);
         table.row().pad(5, 0, 5, 0);
-        table.add(newGame).fillX().uniformX().colspan(2);
         table.row().pad(5, 0, 5, 0);
+        table.add(newGame).fillX().uniformX();
         table.add(preferences).fillX().uniformX();
         table.add(exit).fillX().uniformX();
 
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                waves.stop();
                 parent.changeScreen(GameMain.INTROMORSEGAME);
             }
         });
@@ -65,6 +76,7 @@ public class MenuScreen implements Screen {
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                waves.stop();
                 Gdx.app.exit();
             }
         });
@@ -74,6 +86,10 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.5f, 0.55f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
+        game.getBatch().begin();
+        game.getBatch().draw(bg, 0, 0);
+        game.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
@@ -102,5 +118,6 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        waves.dispose();
     }
 }

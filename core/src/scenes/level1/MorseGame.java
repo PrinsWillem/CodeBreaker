@@ -3,6 +3,7 @@ package scenes.level1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,13 +34,20 @@ public class MorseGame implements Screen {
     Label startMorse;
     Label morse;
     Label answer;
+    Label response;
+    Label textResponse;
 
     MorseCode morseCode;
+
+    private Sound dot;
+    private Sound dash;
 
     public MorseGame(GameMain gameMain) {
         parent = gameMain;
         stage = new Stage(new ScreenViewport());
         morseCode = new MorseCode();
+        dot = Gdx.audio.newSound(Gdx.files.internal("Sounds/dot.ogg"));
+        dash = Gdx.audio.newSound(Gdx.files.internal("Sounds/dash.ogg"));
     }
 
     @Override
@@ -55,14 +63,15 @@ public class MorseGame implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
-        startTranslate = new Label("Ready to train? Translate:", skin);
-        startWords = new Label("L E A R N   C O D I N G", skin);
+        startTranslate = new Label("Looking for distress signal. Translate:", skin);
+        startWords = new Label("I S   A N Y O N E   O U T   T H E R E", skin);
         startMorse = new Label( "", skin);
 
         final TextButton morseKeyDot = new TextButton(".", skin, "default");
         final TextButton morseKeyDash = new TextButton("-", skin, "default");
         final TextButton morseKeyPause = new TextButton("II", skin, "default");
         final TextButton morseKeyListen = new TextButton("Listen", skin, "default");
+        final TextButton nextChapter = new TextButton(" Find the Captain ", skin, "default");
 
         table.add(startTranslate).height(50).colspan(5);
         table.row().pad(5, 0, 5, 0);
@@ -77,10 +86,18 @@ public class MorseGame implements Screen {
         table.add(morseKeyPause);
         table.add(morseKeyListen);
 
+        nextChapter.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(GameMain.FINDTHECAPTAIN);
+            }
+        });
+
         morseKeyDot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(morseKeyDot.isPressed()){
+                    dot.play();
                     typedMorse.add(".");
                     morse = new Label(typedMorse.toString()
                             .replace(", ", "")
@@ -108,6 +125,7 @@ public class MorseGame implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(morseKeyDash.isPressed()){
+                    dash.play();
                     typedMorse.add("-");
                     morse = new Label(typedMorse.toString()
                             .replace(", ", "")
@@ -163,8 +181,10 @@ public class MorseGame implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(morseKeyListen.isPressed()){
                     String translatedInMorse = morseCode.getMorseWordTranslation(typedMorse);
-                    if(Objects.equals(translatedInMorse, "learn coding")) {
+                    if(Objects.equals(translatedInMorse, "i")) {
                         answer = new Label("CODE RECEIVED SUCCESSFULLY", skin);
+                        textResponse = new Label("Response received:", skin);
+                        response = new Label("S O S", skin);
                         morse = new Label(typedMorse.toString()
                                 .replace(", ", "")
                                 .replace("[", "")
@@ -173,13 +193,14 @@ public class MorseGame implements Screen {
                         table.reset();
                         table.add().height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
-                        table.add().height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
-                        table.add(morse).height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
                         table.add(answer).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
-                        table.add();
+                        table.add(textResponse).height(50).colspan(5);
+                        table.row().pad(5, 0, 5, 0);
+                        table.add(response).height(50).colspan(5);
+                        table.row().pad(5, 0, 5, 0);
+                        table.add(nextChapter).colspan(5);
+
                     }else{
                         answer = new Label("Mmmm... Send it again?", skin);
                         typedMorse.clear();
@@ -244,5 +265,7 @@ public class MorseGame implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        dash.dispose();
+        dot.dispose();
     }
 }
