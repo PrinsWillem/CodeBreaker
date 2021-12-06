@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 import helpers.GameInfo;
 
-public class Room1WestEdge extends Sprite {
+public class Room3EastEdge extends Sprite {
     private World world;
     private Body body;
 
-    public Room1WestEdge(World world, String name, float x, float y) {
+    public Room3EastEdge(World world, String name, float x, float y) {
         super(new Texture(name));
         this.world = world;
-        setPosition(x - -385, y - 109);
+        setPosition(x - -1457, y - 146);
         createBody();
     }
 
@@ -31,7 +31,7 @@ public class Room1WestEdge extends Sprite {
 //        fixtureDef.density = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("Room1WestEdge");
+        fixture.setUserData("Room3EastEdge");
 //        fixture.setSensor(true);
         shape.dispose();
     }

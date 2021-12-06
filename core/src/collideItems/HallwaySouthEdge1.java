@@ -31,7 +31,7 @@ public class HallwaySouthEdge1 extends Sprite {
 //        fixtureDef.density = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("HallwaySouthEdge");
+        fixture.setUserData("HallwaySouthEdge1");
 //        fixture.setSensor(true);
         shape.dispose();
     }

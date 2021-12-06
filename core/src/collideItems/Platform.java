@@ -12,7 +12,7 @@ public class Platform extends Sprite {
     public Platform(World world, String name, float x, float y) {
         super(new Texture(name));
         this.world = world;
-        setPosition(x + 97, y + 22);
+        setPosition(x + 96, y + 24);
         createBody();
     }
 
