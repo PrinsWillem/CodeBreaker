@@ -141,6 +141,9 @@ public class FindTheCaptain implements Screen, ContactListener {
         world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            menuMusic.stop();
+            waves.stop();
+            thunder.stop();
             parent.changeScreen(GameMain.MENU);
         }
     }
@@ -166,9 +169,14 @@ public class FindTheCaptain implements Screen, ContactListener {
 
     @Override
     public void dispose() {
+        world.dispose();
+        debugRenderer.dispose();
         bg.dispose();
         player.getTexture().dispose();
         platform.getTexture().dispose();
+        menuMusic.dispose();
+        waves.dispose();
+        thunder.dispose();
     }
 
     @Override
@@ -183,6 +191,9 @@ public class FindTheCaptain implements Screen, ContactListener {
             secondBody = contact.getFixtureA();
         }
         if(firstBody.getUserData() == "Player" && secondBody.getUserData() == "Captain"){
+            menuMusic.stop();
+            waves.stop();
+            thunder.stop();
             parent.changeScreen(GameMain.INTROMORSEANSWER);
         }
         System.out.println("The name of the first body is " + firstBody.getUserData());

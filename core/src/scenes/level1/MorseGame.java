@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -22,12 +23,15 @@ import java.util.Objects;
 public class MorseGame implements Screen {
 
     private GameMain parent;
+    private GameMain game;
     private Stage stage;
 
     ArrayList<String> typedMorse;
 
     Table table;
     Skin skin;
+
+    private Texture morsebg;
 
     Label startTranslate;
     Label startWords;
@@ -45,6 +49,7 @@ public class MorseGame implements Screen {
     public MorseGame(GameMain gameMain) {
         parent = gameMain;
         stage = new Stage(new ScreenViewport());
+        this.game = gameMain;
         morseCode = new MorseCode();
         dot = Gdx.audio.newSound(Gdx.files.internal("Sounds/dot.ogg"));
         dash = Gdx.audio.newSound(Gdx.files.internal("Sounds/dash.ogg"));
@@ -62,6 +67,8 @@ public class MorseGame implements Screen {
         stage.addActor(table);
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
+
+        morsebg = new Texture("Backgrounds/desk1.jpg");
 
         startTranslate = new Label("Looking for distress signal. Translate:", skin);
         startWords = new Label("I S   A N Y O N E   O U T   T H E R E", skin);
@@ -233,6 +240,10 @@ public class MorseGame implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.5f, 0.55f, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
+        game.getBatch().begin();
+        game.getBatch().draw(morsebg, 0, 0);
+        game.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
