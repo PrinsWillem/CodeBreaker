@@ -1,4 +1,48 @@
 package scenes.level1;
 
-public class ConclusionMorseGame {
+import com.badlogic.gdx.Screen;
+import com.codeclan.game.GameMain;
+
+public class ConclusionMorseGame implements Screen {
+
+    private GameMain parent;
+
+    public ConclusionMorseGame(GameMain gameMain) {
+        parent = gameMain;
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
