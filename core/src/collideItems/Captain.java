@@ -12,7 +12,7 @@ public class Captain extends Sprite {
     public Captain(World world, String name, float x, float y) {
         super(new Texture(name));
         this.world = world;
-        setPosition(x + 400, y - 75);
+        setPosition(x + 2500, y - 75);
         createBody();
     }
 

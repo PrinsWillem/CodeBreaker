@@ -94,7 +94,7 @@ public class FindTheCaptain implements Screen, ContactListener {
         }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             player.setWalking(true);
             player.setChangedSide(true);
-            x += 1;
+            x += 25;
         }else{
             player.setWalking(false);
             player.setWalkingD(false);
@@ -175,14 +175,18 @@ public class FindTheCaptain implements Screen, ContactListener {
     public void beginContact(Contact contact) {
         Fixture firstBody, secondBody;
 
-        if(contact.getFixtureA().getUserData() == "Captain"){
+        if(contact.getFixtureA().getUserData() == "Player"){
             firstBody = contact.getFixtureA();
             secondBody = contact.getFixtureB();
         }else{
             firstBody = contact.getFixtureB();
             secondBody = contact.getFixtureA();
         }
+        if(firstBody.getUserData() == "Player" && secondBody.getUserData() == "Captain"){
+            parent.changeScreen(GameMain.INTROMORSEANSWER);
+        }
         System.out.println("The name of the first body is " + firstBody.getUserData());
+
     }
 
     @Override
