@@ -5,19 +5,24 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.codeclan.game.GameMain;
+import helpers.GameInfo;
 
 public class IntroMorseAnswer implements Screen {
 
     private GameMain parent;
     private GameMain game;
     private Stage stage;
+
+    private OrthographicCamera mainCamera;
 
     Table table;
     Skin skin;
@@ -28,6 +33,9 @@ public class IntroMorseAnswer implements Screen {
         parent = gameMain;
         this.game = gameMain;
         stage = new Stage(new ScreenViewport());
+
+        mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HEIGHT);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
     }
 
     @Override
@@ -41,7 +49,7 @@ public class IntroMorseAnswer implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
-        bg = new Texture("Backgrounds/introMorse.jpg");
+        bg = new Texture("Backgrounds/captainSpeech.jpg");
     }
 
     @Override
@@ -55,6 +63,10 @@ public class IntroMorseAnswer implements Screen {
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
+
+        mainCamera.position.set(480, 320, 0);
+        game.getBatch().setProjectionMatrix(mainCamera.combined);
+        mainCamera.update();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             parent.changeScreen(GameMain.MENU);
@@ -87,5 +99,6 @@ public class IntroMorseAnswer implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        bg.dispose();
     }
 }

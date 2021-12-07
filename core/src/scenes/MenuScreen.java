@@ -2,12 +2,11 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,18 +19,19 @@ public class MenuScreen implements Screen {
     private GameMain parent;
     private GameMain game;
     private Stage stage;
-    private Label title;
 
     private Texture bg;
-    private Sound waves;
+    private Music menuMusic;
 
     public MenuScreen(GameMain gameMain) {
         parent = gameMain;
         this.game = gameMain;
         stage = new Stage(new ScreenViewport());
 
-        waves = Gdx.audio.newSound(Gdx.files.internal("Sounds/waves.ogg"));
-        waves.play();
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/The Walk.ogg"));
+        menuMusic.setVolume(1);
+        menuMusic.setLooping(true);
+        menuMusic.play();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class MenuScreen implements Screen {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                waves.stop();
+                menuMusic.stop();
                 parent.changeScreen(GameMain.INTROMORSEGAME);
             }
         });
@@ -76,7 +76,7 @@ public class MenuScreen implements Screen {
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                waves.stop();
+                menuMusic.stop();
                 Gdx.app.exit();
             }
         });
@@ -118,6 +118,7 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        waves.dispose();
+        bg.dispose();
+        menuMusic.dispose();
     }
 }

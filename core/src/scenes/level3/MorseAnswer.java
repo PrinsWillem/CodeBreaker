@@ -30,13 +30,16 @@ public class MorseAnswer implements Screen {
 
     Table table;
     Skin skin;
-    private Texture morseanswerbg;
+
+    private Texture bg;
 
     Label startTranslate;
     Label startWords;
     Label startMorse;
     Label morse;
     Label answer;
+    Label response;
+    Label textResponse;
 
     MorseCode morseCode;
 
@@ -65,9 +68,9 @@ public class MorseAnswer implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
-        morseanswerbg = new Texture("Backgrounds/desk2.jpg");
+        bg = new Texture("Backgrounds/desk1.jpg");
 
-        startTranslate = new Label("Reply to distress signal. Translate:", skin);
+        startTranslate = new Label("Looking for distress signal. Translate:", skin);
         startWords = new Label("H E L P   I S   C O M I N G", skin);
         startMorse = new Label( "", skin);
 
@@ -82,17 +85,18 @@ public class MorseAnswer implements Screen {
         table.add(startWords).height(50).colspan(5);
         table.row().pad(5, 0, 5, 0);
         table.add(startMorse).height(50).colspan(5);
-        table.row().pad(5, 0, 5, 0);
+        table.row();
         table.add().height(50).colspan(5);
         table.row().pad(5, 0, 5, 0);
-        table.add(morseKeyDot);
-        table.add(morseKeyDash);
-        table.add(morseKeyPause);
-        table.add(morseKeyListen);
+        table.add(morseKeyDot).fillX().uniformX();
+        table.add(morseKeyDash).fillX().uniformX();
+        table.add(morseKeyPause).fillX().uniformX();
+        table.add(morseKeyListen).fillX().uniformX();
 
         nextChapter.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                table.reset();
                 parent.changeScreen(GameMain.CONCLUSIONMORSEANSWER);
             }
         });
@@ -114,13 +118,13 @@ public class MorseAnswer implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -142,13 +146,13 @@ public class MorseAnswer implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -169,13 +173,13 @@ public class MorseAnswer implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -187,6 +191,8 @@ public class MorseAnswer implements Screen {
                     String translatedInMorse = morseCode.getMorseWordTranslation(typedMorse);
                     if(Objects.equals(translatedInMorse, "i")) {
                         answer = new Label("CODE RECEIVED SUCCESSFULLY", skin);
+                        textResponse = new Label("Response received:", skin);
+                        response = new Label("H U R R Y", skin);
                         morse = new Label(typedMorse.toString()
                                 .replace(", ", "")
                                 .replace("[", "")
@@ -195,11 +201,11 @@ public class MorseAnswer implements Screen {
                         table.reset();
                         table.add().height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
-                        table.add().height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
-                        table.add(morse).height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
                         table.add(answer).height(50).colspan(5);
+                        table.row().pad(5, 0, 5, 0);
+                        table.add(textResponse).height(50).colspan(5);
+                        table.row().pad(5, 0, 5, 0);
+                        table.add(response).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
                         table.add(nextChapter).colspan(5);
 
@@ -217,13 +223,13 @@ public class MorseAnswer implements Screen {
                         table.add(startWords).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
                         table.add(morse).height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
+                        table.row();
                         table.add(answer).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
-                        table.add(morseKeyDot);
-                        table.add(morseKeyDash);
-                        table.add(morseKeyPause);
-                        table.add(morseKeyListen);
+                        table.add(morseKeyDot).fillX().uniformX();
+                        table.add(morseKeyDash).fillX().uniformX();
+                        table.add(morseKeyPause).fillX().uniformX();
+                        table.add(morseKeyListen).fillX().uniformX();
                     }
                 }
             }
@@ -237,15 +243,12 @@ public class MorseAnswer implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         game.getBatch().begin();
-        game.getBatch().draw(morseanswerbg, 0, 0);
+        game.getBatch().draw(bg, 0, 0);
         game.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            parent.changeScreen(GameMain.MENU);
-        }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             parent.changeScreen(GameMain.MENU);
         }
@@ -274,5 +277,8 @@ public class MorseAnswer implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        bg.dispose();
+        dash.dispose();
+        dot.dispose();
     }
 }

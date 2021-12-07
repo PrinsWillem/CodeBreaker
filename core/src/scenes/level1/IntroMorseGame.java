@@ -25,10 +25,6 @@ public class IntroMorseGame implements Screen {
     private Texture bg;
     private Sound waves;
 
-    Label startTranslate;
-    Label startWords;
-    Label startMorse;
-
     public IntroMorseGame(GameMain gameMain) {
         parent = gameMain;
         this.game = gameMain;
@@ -65,6 +61,7 @@ public class IntroMorseGame implements Screen {
         stage.draw();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            waves.stop();
             parent.changeScreen(GameMain.MENU);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
@@ -96,6 +93,7 @@ public class IntroMorseGame implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        bg.dispose();
         waves.dispose();
     }
 }

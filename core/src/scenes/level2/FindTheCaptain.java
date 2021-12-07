@@ -43,7 +43,7 @@ public class FindTheCaptain implements Screen, ContactListener {
         parent = gameMain;
         this.game = gameMain;
 
-        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/music.ogg"));
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Bing Crosby.ogg"));
         menuMusic.setVolume(1);
         menuMusic.setLooping(true);
         menuMusic.play();

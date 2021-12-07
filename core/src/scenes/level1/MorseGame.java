@@ -3,6 +3,7 @@ package scenes.level1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,7 +32,7 @@ public class MorseGame implements Screen {
     Table table;
     Skin skin;
 
-    private Texture morsebg;
+    private Texture bg;
 
     Label startTranslate;
     Label startWords;
@@ -68,7 +69,7 @@ public class MorseGame implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
-        morsebg = new Texture("Backgrounds/desk1.jpg");
+        bg = new Texture("Backgrounds/desk1.jpg");
 
         startTranslate = new Label("Looking for distress signal. Translate:", skin);
         startWords = new Label("I S   A N Y O N E   O U T   T H E R E", skin);
@@ -85,17 +86,18 @@ public class MorseGame implements Screen {
         table.add(startWords).height(50).colspan(5);
         table.row().pad(5, 0, 5, 0);
         table.add(startMorse).height(50).colspan(5);
-        table.row().pad(5, 0, 5, 0);
+        table.row();
         table.add().height(50).colspan(5);
         table.row().pad(5, 0, 5, 0);
-        table.add(morseKeyDot);
-        table.add(morseKeyDash);
-        table.add(morseKeyPause);
-        table.add(morseKeyListen);
+        table.add(morseKeyDot).fillX().uniformX();
+        table.add(morseKeyDash).fillX().uniformX();
+        table.add(morseKeyPause).fillX().uniformX();
+        table.add(morseKeyListen).fillX().uniformX();
 
         nextChapter.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                table.reset();
                 parent.changeScreen(GameMain.FINDTHECAPTAIN);
             }
         });
@@ -117,13 +119,13 @@ public class MorseGame implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -145,13 +147,13 @@ public class MorseGame implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -172,13 +174,13 @@ public class MorseGame implements Screen {
                     table.add(startWords).height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
                     table.add(morse).height(50).colspan(5);
-                    table.row().pad(5, 0, 5, 0);
+                    table.row();
                     table.add().height(50).colspan(5);
                     table.row().pad(5, 0, 5, 0);
-                    table.add(morseKeyDot);
-                    table.add(morseKeyDash);
-                    table.add(morseKeyPause);
-                    table.add(morseKeyListen);
+                    table.add(morseKeyDot).fillX().uniformX();
+                    table.add(morseKeyDash).fillX().uniformX();
+                    table.add(morseKeyPause).fillX().uniformX();
+                    table.add(morseKeyListen).fillX().uniformX();
                 }
             }
         });
@@ -222,13 +224,13 @@ public class MorseGame implements Screen {
                         table.add(startWords).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
                         table.add(morse).height(50).colspan(5);
-                        table.row().pad(5, 0, 5, 0);
+                        table.row();
                         table.add(answer).height(50).colspan(5);
                         table.row().pad(5, 0, 5, 0);
-                        table.add(morseKeyDot);
-                        table.add(morseKeyDash);
-                        table.add(morseKeyPause);
-                        table.add(morseKeyListen);
+                        table.add(morseKeyDot).fillX().uniformX();
+                        table.add(morseKeyDash).fillX().uniformX();
+                        table.add(morseKeyPause).fillX().uniformX();
+                        table.add(morseKeyListen).fillX().uniformX();
                     }
                 }
             }
@@ -242,7 +244,7 @@ public class MorseGame implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         game.getBatch().begin();
-        game.getBatch().draw(morsebg, 0, 0);
+        game.getBatch().draw(bg, 0, 0);
         game.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
@@ -276,6 +278,7 @@ public class MorseGame implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        bg.dispose();
         dash.dispose();
         dot.dispose();
     }

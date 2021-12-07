@@ -8,6 +8,7 @@ import scenes.level1.IntroMorseGame;
 import scenes.level1.MorseGame;
 import scenes.level2.FindTheCaptain;
 import scenes.level3.ConclusionMorseAnswer;
+import scenes.level3.EndScreen;
 import scenes.level3.IntroMorseAnswer;
 import scenes.level3.MorseAnswer;
 
@@ -31,14 +32,17 @@ public class GameMain extends Game {
 
 	public final static int MENU = 0;
 	public final static int PREFERENCES = 1;
-	public final static int ENDGAME = 2;
 
-	public final static int INTROMORSEGAME = 3;
-	public final static int MORSEGAME = 4;
-	public final static int FINDTHECAPTAIN = 5;
-	public final static int INTROMORSEANSWER = 6;
-	public final static int MORSEANSWER = 7;
-	public final static int CONCLUSIONMORSEANSWER = 8;
+	public final static int INTROMORSEGAME = 2;
+	public final static int MORSEGAME = 3;
+
+	public final static int FINDTHECAPTAIN = 4;
+
+	public final static int INTROMORSEANSWER = 5;
+	public final static int MORSEANSWER = 6;
+	public final static int CONCLUSIONMORSEANSWER = 7;
+
+	public final static int ENDSCREEN = 8;
 
 	private AppPreferences preferences;
 	
@@ -69,10 +73,6 @@ public class GameMain extends Game {
 				if(preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
 				break;
-			case ENDGAME:
-				if(endScreen == null) endScreen = new EndScreen(this);
-				this.setScreen(endScreen);
-				break;
 
 			case INTROMORSEGAME:
 				if(introMorseGame == null) introMorseGame = new IntroMorseGame(this);
@@ -99,6 +99,11 @@ public class GameMain extends Game {
 			case CONCLUSIONMORSEANSWER:
 				if(conclusionMorseAnswer == null) conclusionMorseAnswer = new ConclusionMorseAnswer(this);
 				this.setScreen(conclusionMorseAnswer);
+				break;
+
+			case ENDSCREEN:
+				if(endScreen == null) endScreen = new EndScreen(this);
+				this.setScreen(endScreen);
 				break;
 		}
 	}
