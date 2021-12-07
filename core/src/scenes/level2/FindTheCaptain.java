@@ -1,6 +1,7 @@
 package scenes.level2;
 
 import collideItems.Captain;
+import collideItems.Gun;
 import collideItems.Platform;
 import collideItems.SouthEdgeFront;
 import com.badlogic.gdx.Gdx;
@@ -34,6 +35,7 @@ public class FindTheCaptain implements Screen, ContactListener {
     private Captain captain;
     private Platform platform;
     private SouthEdgeFront southEdgeFront;
+    private Gun gun;
 
     private Music menuMusic;
     private Sound waves;
@@ -72,6 +74,8 @@ public class FindTheCaptain implements Screen, ContactListener {
         captain = new Captain(world, "Captain/captain.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
         platform = new Platform(world, "Backgrounds/ShipCollision/platform.png", GameInfo.WIDTH / 2,
+                GameInfo.HEIGHT / 2);
+        gun = new Gun(world, "Backgrounds/ShipCollision/Canon.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
         southEdgeFront = new SouthEdgeFront(world, "Backgrounds/ShipCollision/WallShipFront.png", GameInfo.WIDTH / 2,
                 GameInfo.HEIGHT / 2);
@@ -126,6 +130,8 @@ public class FindTheCaptain implements Screen, ContactListener {
                 captain.getY() - (platform.getWidth() / 2) + 75);
         game.getBatch().draw(platform, platform.getX() - (platform.getWidth() / 2),
                 platform.getY() - ((platform.getWidth() / 2) + 8));
+        game.getBatch().draw(gun, gun.getX() - (gun.getWidth() / 2),
+                gun.getY() - ((gun.getWidth() / 2) + 8));
         game.getBatch().draw(southEdgeFront, southEdgeFront.getX() - 160,
                 southEdgeFront.getY());
 
