@@ -3,6 +3,7 @@ package scenes.level3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,6 +29,8 @@ public class EndScreen implements Screen {
 
     private Texture bg;
 
+    private Music endMusic;
+
     public EndScreen(GameMain gameMain) {
         parent = gameMain;
         this.game = gameMain;
@@ -35,6 +38,11 @@ public class EndScreen implements Screen {
 
         mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HEIGHT);
         mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+
+        endMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Cars.ogg"));
+        endMusic.setVolume(1);
+        endMusic.setLooping(true);
+        endMusic.play();
     }
 
     @Override
@@ -43,7 +51,7 @@ public class EndScreen implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
-        bg = new Texture("Backgrounds/captainSpeech.jpg");
+        bg = new Texture("Backgrounds/EndScreen.jpg");
     }
 
     @Override
@@ -63,6 +71,7 @@ public class EndScreen implements Screen {
         mainCamera.update();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            endMusic.stop();
             parent.changeScreen(GameMain.MENU);
         }
     }
@@ -91,5 +100,6 @@ public class EndScreen implements Screen {
     public void dispose() {
         stage.dispose();
         bg.dispose();
+        endMusic.dispose();
     }
 }

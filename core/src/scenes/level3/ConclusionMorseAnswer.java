@@ -3,6 +3,7 @@ package scenes.level3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,6 +30,8 @@ public class ConclusionMorseAnswer implements Screen {
 
     private Texture bg;
 
+    private Music battle;
+
     public ConclusionMorseAnswer(GameMain gameMain) {
         parent = gameMain;
         this.game = gameMain;
@@ -36,6 +39,11 @@ public class ConclusionMorseAnswer implements Screen {
 
         mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HEIGHT);
         mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+
+        battle = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Braveheart.ogg"));
+        battle.setVolume(1);
+        battle.setLooping(true);
+        battle.play();
     }
 
     @Override
@@ -69,9 +77,11 @@ public class ConclusionMorseAnswer implements Screen {
         mainCamera.update();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            battle.stop();
             parent.changeScreen(GameMain.MENU);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            battle.stop();
             parent.changeScreen(GameMain.ENDSCREEN);
         }
     }
@@ -100,5 +110,6 @@ public class ConclusionMorseAnswer implements Screen {
     public void dispose() {
         stage.dispose();
         bg.dispose();
+        battle.stop();
     }
 }

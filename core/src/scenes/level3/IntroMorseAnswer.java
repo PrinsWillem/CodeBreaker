@@ -28,6 +28,7 @@ public class IntroMorseAnswer implements Screen {
     Skin skin;
 
     private Texture bg;
+    private Sound captain;
 
     public IntroMorseAnswer(GameMain gameMain) {
         parent = gameMain;
@@ -50,6 +51,9 @@ public class IntroMorseAnswer implements Screen {
         skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
 
         bg = new Texture("Backgrounds/captainSpeech.jpg");
+
+        captain = Gdx.audio.newSound(Gdx.files.internal("Sounds/waves.ogg"));
+        captain.play();
     }
 
     @Override
@@ -69,9 +73,11 @@ public class IntroMorseAnswer implements Screen {
         mainCamera.update();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            captain.stop();
             parent.changeScreen(GameMain.MENU);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            captain.stop();
             parent.changeScreen(GameMain.MORSEANSWER);
         }
     }
@@ -100,5 +106,6 @@ public class IntroMorseAnswer implements Screen {
     public void dispose() {
         stage.dispose();
         bg.dispose();
+        captain.dispose();
     }
 }
