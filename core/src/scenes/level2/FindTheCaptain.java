@@ -113,6 +113,7 @@ public class FindTheCaptain implements Screen, ContactListener {
         box2DCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM,
                 GameInfo.HEIGHT / GameInfo.PPM);
         box2DCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+
         debugRenderer = new Box2DDebugRenderer();
 
         world = new World(new Vector2(0, 0), true);
@@ -392,7 +393,7 @@ public class FindTheCaptain implements Screen, ContactListener {
 
         game.getBatch().end();
 
-        debugRenderer.render(world, box2DCamera.combined);
+//        debugRenderer.render(world, box2DCamera.combined);
 
         mainCamera.position.set(player.getX(), player.getY(), 0);
         game.getBatch().setProjectionMatrix(mainCamera.combined);
