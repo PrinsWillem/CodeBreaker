@@ -1,0 +1,63 @@
+Player Animation Small.png
+size: 252, 24
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Player 2
+  rotate: false
+  xy: 29, 0
+  size: 14, 24
+  orig: 14, 24
+  offset: 0, 0
+  index: -1
+Player 3
+  rotate: false
+  xy: 60, 0
+  size: 12, 24
+  orig: 22, 47
+  offset: 0, 0
+  index: -1
+Player 4
+  rotate: false
+  xy: 90, 0
+  size: 13, 24
+  orig: 13, 24
+  offset: 0, 0
+  index: -1
+Player 5
+  rotate: false
+  xy: 119, 0
+  size: 13, 24
+  orig: 13, 24
+  offset: 0, 0
+  index: -1
+Player 6
+  rotate: false
+  xy: 148, 0
+  size: 15, 24
+  orig: 15, 24
+  offset: 0, 0
+  index: -1
+Player 7
+  rotate: false
+  xy: 178, 1
+  size: 14, 24
+  orig: 14, 24
+  offset: 0, 0
+  index: -1
+Player 8
+  rotate: false
+  xy: 210, 0
+  size: 13, 24
+  orig: 13, 24
+  offset: 0, 0
+  index: -1
+Player 9
+  rotate: false
+  xy: 240, 0
+  size: 12, 24
+  orig: 12, 24
+  offset: 0, 0
+  index: -1
+
+

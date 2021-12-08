@@ -1,0 +1,68 @@
+Player AnimationU.png
+size: 540, 48
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Player 1
+  rotate: false
+  xy: 10, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 2
+  rotate: false
+  xy: 73, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 3
+  rotate: false
+  xy: 133, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 4
+  rotate: false
+  xy: 194, 0
+  size: 29, 47
+  size: 29, 47
+  offset: 0, 0
+  index: -1
+Player 5
+  rotate: false
+  xy: 253, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 6
+  rotate: false
+  xy: 313, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 7
+  rotate: false
+  xy: 374, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1
+Player 8
+  rotate: false
+  xy: 435, 1
+  size: 29, 47
+  orig: 29, 47
+  offset: 0, 0
+  index: -1
+Player 9
+  rotate: false
+  xy: 493, 0
+  size: 30, 47
+  orig: 30, 47
+  offset: 0, 0
+  index: -1

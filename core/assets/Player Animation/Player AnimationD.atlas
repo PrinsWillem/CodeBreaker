@@ -5,7 +5,7 @@ filter: Nearest, Nearest
 repeat: none
 Player 1
   rotate: false
-  xy: 4, 0
+  xy: 14, 0
   size: 30, 48
   orig: 30, 48
   offset: 0, 0
@@ -34,13 +34,13 @@ Player 4
 Player 5
   rotate: false
   xy: 255, 0
-  size: 24, 48
-  orig: 24, 48
+  size: 30, 48
+  orig: 30, 48
   offset: 0, 0
   index: -1
 Player 6
   rotate: false
-  xy: 254, 0
+  xy: 313, 0
   size: 30, 48
   orig: 30, 48
   offset: 0, 0
