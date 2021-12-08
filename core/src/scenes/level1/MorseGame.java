@@ -72,7 +72,7 @@ public class MorseGame implements Screen {
         bg = new Texture("Backgrounds/desk1.jpg");
 
         startTranslate = new Label("Looking for distress signal. Translate:", skin);
-        startWords = new Label("I S   A N Y O N E   O U T   T H E R E", skin);
+        startWords = new Label("A N Y O N E   O U T   T H E R E", skin);
         startMorse = new Label( "", skin);
 
         final TextButton morseKeyDot = new TextButton(".", skin, "default");
@@ -190,10 +190,11 @@ public class MorseGame implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(morseKeyListen.isPressed()){
                     String translatedInMorse = morseCode.getMorseWordTranslation(typedMorse);
-                    if(Objects.equals(translatedInMorse, "i")) {
+                    System.out.println(translatedInMorse);
+                    if(Objects.equals(translatedInMorse, "anyone out there")) {
                         answer = new Label("CODE RECEIVED SUCCESSFULLY", skin);
                         textResponse = new Label("Response received:", skin);
-                        response = new Label("S O S", skin);
+                        response = new Label("S O S - 57°50'02.2 N 8°32'20.5 W", skin);
                         morse = new Label(typedMorse.toString()
                                 .replace(", ", "")
                                 .replace("[", "")

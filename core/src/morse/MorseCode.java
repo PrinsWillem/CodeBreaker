@@ -9,7 +9,7 @@ public class MorseCode {
         this.letterToMorse = new HashMap<>();
         letterToMorse.put("a", ".-");
         letterToMorse.put("b", "-...");
-        letterToMorse.put("c", "-.-");
+        letterToMorse.put("c", "-.-.");
         letterToMorse.put("d", "-..");
         letterToMorse.put("e", ".");
         letterToMorse.put("f", "..-.");
@@ -17,7 +17,7 @@ public class MorseCode {
         letterToMorse.put("h", "....");
         letterToMorse.put("i", "..");
         letterToMorse.put("j", ".---");
-        letterToMorse.put("k", "-.");
+        letterToMorse.put("k", "-.-");
         letterToMorse.put("l", ".-..");
         letterToMorse.put("m", "--");
         letterToMorse.put("n", "-.");
