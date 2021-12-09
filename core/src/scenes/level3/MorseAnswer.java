@@ -189,6 +189,7 @@ public class MorseAnswer implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if(morseKeyListen.isPressed()){
                     String translatedInMorse = morseCode.getMorseWordTranslation(typedMorse);
+                    System.out.println(translatedInMorse);
                     if(Objects.equals(translatedInMorse, "help is coming")) {
                         answer = new Label("CODE RECEIVED SUCCESSFULLY", skin);
                         textResponse = new Label("Response received:", skin);
